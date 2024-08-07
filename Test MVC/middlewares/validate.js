@@ -1,6 +1,6 @@
 const isValid = (req, res, next) => {
   let { Task, _id } = req.body;
-  if (Task && _id) {
+  if (Task) {
     next();
   } else {
     res.send("Please Enter Reuired Data");
