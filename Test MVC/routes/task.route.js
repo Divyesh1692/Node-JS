@@ -8,8 +8,8 @@ const {
 const isValid = require("../middlewares/validate");
 const taskRouter = Router();
 taskRouter.get("/", getTask);
-taskRouter.post("/", isValid, createTask);
+taskRouter.post("/", createTask);
 taskRouter.delete("/:id", deleteTask);
-taskRouter.patch("/:id", isValid, updateTask);
+taskRouter.patch("/:id", updateTask);
 
 module.exports = taskRouter;
