@@ -1,10 +1,12 @@
 # Custom server Project Instructions
-## **Total Marks: 10**
-### Running the Server
-1. Start the server on **PORT 8090**. Ensure strict adherence to this port number.
-<!-- Overview -->
-you to make get 5 route with using http and fs module in node js
 
+## **Total Marks: 10**
+
+### Running the Server
+
+1. Start the server on **PORT 8090**. Ensure strict adherence to this port number.
+   <!-- Overview -->
+   you to make get 5 route with using http and fs module in node js
 
 - `/`
 - `/login`
@@ -12,16 +14,16 @@ you to make get 5 route with using http and fs module in node js
 - `/contact`
 - `/service`
 
-
 <!-- / -->
+
 ## when we hit the `/` this route send the response html
+
 - use fs module read file send html file
 - make `img` tag with give `id=img` add you website image
 - on the html file it should be contains `<h1> </h1>` with `id=title` inside the html your website name should be there
 - `p` tag with `id=grid` inside this tag show your grid
 - `span` tag with `id=course` inside this tag show your course name
 - add css also
-
 
 ```js
 ## Testing Your Score
@@ -32,6 +34,3 @@ you to make get 5 route with using http and fs module in node js
 
 **Best of Luck!**
 ```
-
-
-
