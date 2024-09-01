@@ -96,7 +96,7 @@ app.get("/recipe/filter", (req, res) => {
   let filteredRecipes = initialRecipe;
 
   if (veg) {
-    filteredRecipes = filteredRecipes.filter((recipe) => recipe.veg === veg);
+    filteredRecipes = filteredRecipes.filter((e) => e.veg == veg);
   }
 
   if (country) {
