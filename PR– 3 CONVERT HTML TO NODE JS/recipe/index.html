@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Data</title>
+</head>
+<body>
+    <div id="parent">
+    
+    </div>
+</body>
+<!-- <script src="script.js"></script> -->
+ <script>
+    const displayData = () => {
+  fetch("http://localhost:8090/recipe/all")
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      let recipeData = data;
+      console.log(recipeData);
+
+      let mainDiv = document.getElementById("parent");
+      mainDiv.innerHTML = "";
+      recipeData.forEach((e) => {
+        let recipeDiv = document.createElement("div");
+        recipeDiv.innerHTML = "";
+        recipeDiv.innerHTML = `
+          <h4>Recipe Name : ${e.name}</h4>
+      <p>Description : ${e.description}</p>
+      <p>PreparationTime : ${e.preparationTime}</p>
+      <p>CookingTime : ${e.cookingTime}</p>
+      <img src="${e.imageUrl}" width="200px" alt="">
+      <p>Country : ${e.country}</p>
+      <p>Veg : ${e.veg}</p>
+          `;
+        mainDiv.appendChild(recipeDiv);
+      });
+    });
+};
+
+displayData();
+ </script>
+</html>

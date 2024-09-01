@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe</title>
+</head>
+<body>
+    <h1>Add a New Recipe</h1>
+  <form id="recipeForm" action="http://localhost:8090/recipe/add" method="post">
+    <label>Name: <input type="text" name="name" ></label><br><br>
+    <label>Description: <input type="text" name="description" ></label><br><br>
+    <label>Preparation Time: <input type="text" name="preparationTime" ></label><br><br>
+    <label>Cooking Time: <input type="text" name="cookingTime" ></label><br><br>
+    <label>Image URL: <input type="text" name="imageUrl" ></label><br><br>
+    <label>Country: <input type="text" name="country" ></label><br><br>
+    <label>Vegetarian : 
+      <input type="radio" name="veg" id="" value="true">Yes
+      <input type="radio" name="veg" id="" value="false">No
+    </label><br><br>
+    <button type="submit">Add Recipe</button>
+  </form>
+</body>
+</html>
