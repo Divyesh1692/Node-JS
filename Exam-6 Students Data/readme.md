@@ -12,19 +12,19 @@ Signup: Create an account with fields such as name, email, password, role (eithe
 
 Login: Log in using email and password.
 
-<h3>Role-based access</h3>
+<h2>Role-based access</h2>
 
 Students: View only their own data.
 
 Teachers: View data of all students.
 
-<h4>Sorting</h4> 
+<h2>Sorting</h2> 
 Sort students by their names (ascending or descending).
 
-<h4>Search</h4> 
+<h2>Search</h2> 
 Search for students by name.
 
-<h4>Data stored in MongoDB with the help of Mongoose</h4>
+<h3>Data stored in MongoDB with the help of Mongoose</h3>
 
 <h2>Tech Stack</h2>
 <h4>Backend: Node.js, Express.js
