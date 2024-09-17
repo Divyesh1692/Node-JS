@@ -6,25 +6,27 @@ Teachers can view all student data.
 
 The dashboard also supports sorting and searching functionality for students based on their names.
 
-<h3>Features</h3>
+<h2>Features</h2>
 
 Signup: Create an account with fields such as name, email, password, role (either student or teacher).
 
 Login: Log in using email and password.
 
-Role-based access:
+<h3>Role-based access</h3>
 
 Students: View only their own data.
 
 Teachers: View data of all students.
 
-Sorting: Sort students by their names (ascending or descending).
+<h4>Sorting</h4> 
+Sort students by their names (ascending or descending).
 
-Search: Search for students by name.
+<h4>Search</h4> 
+Search for students by name.
 
-Data stored in MongoDB with the help of Mongoose.
+<h4>Data stored in MongoDB with the help of Mongoose</h4>
 
-Tech Stack
-Backend: Node.js, Express.js
+<h2>Tech Stack</h2>
+<h4>Backend: Node.js, Express.js
 Database: MongoDB (using Mongoose)
-Frontend: HTML, JavaScript, LocalStorage for role identification
+Frontend: HTML, JavaScript, LocalStorage for role identification</h4>
