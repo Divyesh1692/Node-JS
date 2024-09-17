@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    
+        <label for="email">Email : <input type="text" id="email" name="email" placeholder="Email"></label><br><br>
+        <label for="password">Password : <input type="text" name="password" id="password" placeholder="Password"></label><br><br>
+        <input type="submit" value="Login" onclick="login()">
+    <br>
+    <label for="">Not A User?  <a href="signup.html ">Signup</a></label>
+    
+</body>
+<script>
+    const loginData = async (user) => {
+  let req = await fetch("http://localhost:8090/user/login", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(user),
+  });
+  let res = await req.json();
+  window.localStorage.setItem("email",user.email);
+  window.location.href = "home.html";
+};
+const login = () => {
+    let user = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    }
+    loginData(user)
+
+}
+
+</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        .sdiv{
+            display: flex;
+            flex-direction: column;
+            border: 2px solid black;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Students Data</h1>
+    <h3 id="Role"></h3>
+    <select name="sort" id="sort" onchange="studentData()">
+        <option value="atoz">A to Z</option>
+        <option value="ztoa">Z to A</option>
+    </select>
+    <input type="text" name="search" id="search" placeholder="Search Student" oninput="studentData()"> 
+    <!-- <input type="button"  id="btn" value="Apply Filter" onclick="studentData()"> -->
+    <div id="sd">
+        
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
