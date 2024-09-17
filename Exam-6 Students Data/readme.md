@@ -1,4 +1,4 @@
-School Dashboard
+<h4>School Dashboard</h4>
 This project implements a school dashboard where users can sign up and log in. Based on the user's role (either student or teacher), the dashboard displays relevant data:
 
 Students see only their own information.
