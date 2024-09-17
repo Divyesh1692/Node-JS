@@ -25,10 +25,14 @@ const studentData = () => {
                 <label for="email">Email : ${userData.email}</label><br>
                 `;
           mainDiv.appendChild(sDiv);
+          return;
         }
       }
       let Role = document.getElementById("Role");
       Role.innerHTML = "Teacher Dashboard";
+      document.getElementById("search").style = "display: inline;";
+      document.getElementById("sort").style = "display: inline;";
+
       sData.forEach((e) => {
         if (e.role == "Student") {
           let sDiv = document.createElement("Div");

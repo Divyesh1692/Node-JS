@@ -18,11 +18,11 @@
 <body>
     <h1>Students Data</h1>
     <h3 id="Role"></h3>
-    <select name="sort" id="sort" onchange="studentData()">
+    <select name="sort" id="sort" onchange="studentData()" style="display: none;">
         <option value="atoz">A to Z</option>
         <option value="ztoa">Z to A</option>
     </select>
-    <input type="text" name="search" id="search" placeholder="Search Student" oninput="studentData()"> 
+    <input type="text" name="search" id="search" placeholder="Search Student" oninput="studentData()" style="display: none;"> 
     <!-- <input type="button"  id="btn" value="Apply Filter" onclick="studentData()"> -->
     <div id="sd">
         

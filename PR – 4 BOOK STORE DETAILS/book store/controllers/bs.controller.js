@@ -81,8 +81,9 @@ const filter = async (req, res) => {
   let data = await book.find(Filter);
 
   if (price) {
-    if (price === "lth") data = data.sort((a, b) => a.price - b.price);
-    else if (price === "htl") data = data.sort((a, b) => b.price - a.price);
+    price == "lth"
+      ? (data = data.sort((a, b) => a.price - b.price))
+      : (data = data.sort((a, b) => b.price - a.price));
   }
 
   res.send(data);
