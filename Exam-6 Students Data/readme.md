@@ -1,4 +1,4 @@
-<h4>School Dashboard</h4>
+<h1>School Dashboard</h1>
 This project implements a school dashboard where users can sign up and log in. Based on the user's role (either student or teacher), the dashboard displays relevant data:
 
 Students see only their own information.
@@ -6,7 +6,7 @@ Teachers can view all student data.
 
 The dashboard also supports sorting and searching functionality for students based on their names.
 
-Features
+<h3>Features</h3>
 
 Signup: Create an account with fields such as name, email, password, role (either student or teacher).
 
