@@ -1,14 +1,21 @@
 const user = require("../models/userSchema");
+const multer = require("multer");
 
 const path = require("path");
 
 const signup = async (req, res) => {
-  let { email } = req.body;
+  let { name, number, email, password, role } = req.body;
   let isUser = await user.findOne({ email: email });
+
+  let profile;
+  if (req.file) {
+    profile = req.file.path;
+  }
+  let User = { name, number, email, password, profile, role };
   if (isUser) {
     return res.send("User Already Exist!!!");
   } else {
-    let data = await user.create(req.body);
+    let data = await user.create(User);
     return res.send(data);
   }
 };
@@ -54,4 +61,15 @@ const filter = async (req, res) => {
   res.send(data);
 };
 
-module.exports = { login, signup, getData, filter };
+const storage = multer.diskStorage({
+  destination: "Uploads",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const Upload = multer({
+  storage: storage,
+});
+
+module.exports = { login, signup, getData, filter, Upload };

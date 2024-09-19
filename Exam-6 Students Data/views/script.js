@@ -20,6 +20,7 @@ const studentData = () => {
           sDiv.innerHTML = "";
           sDiv.className = "sdiv";
           sDiv.innerHTML = `
+                <img src="http://localhost:8090/${userData.profile}" alt="">
                 <label for="name">Name : ${userData.name}</label><br>
                 <label for="number">Number : ${userData.number}</label><br>
                 <label for="email">Email : ${userData.email}</label><br>
@@ -39,6 +40,7 @@ const studentData = () => {
           sDiv.innerHTML = "";
           sDiv.className = "sdiv";
           sDiv.innerHTML = `
+                <img src="http://localhost:8090/${e.profile}" alt="">
                 <label for="name">Name : ${e.name}</label><br>
                 <label for="number">Number : ${e.number}</label><br>
                 <label for="email">Email : ${e.email}</label><br>

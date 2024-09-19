@@ -7,11 +7,12 @@
 </head>
 <body>
     <h1>Signup</h1>
-    <form action="http://localhost:8090/user/signup" method="post">
+    <form action="http://localhost:8090/user/signup" enctype="multipart/form-data" method="post">
         <label for="name">Name : <input type="text" name="name" placeholder="Name"></label><br><br>
         <label for="number">Number: <input type="text" name="number" placeholder="Number"></label><br><br>
         <label for="email">Email : <input type="text" name="email" placeholder="Email"></label><br><br>
         <label for="password">Password : <input type="text" name="password" placeholder="Password"></label><br><br>
+        <label for="profile">Profile : <input type="file" name="profile" id="profile"></label><br><br>
         <label for="role">Role : <select name="role" id="">
             <option value="Student">Student</option>
             <option value="Teacher">Teacher</option>
