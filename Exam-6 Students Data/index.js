@@ -3,12 +3,14 @@ const express = require("express");
 const path = require("path");
 const database = require("./config/db");
 const userRoute = require("./routes/userRoutes");
+const cookies = require("cookie-parser");
 const cors = require("cors");
 const app = express();
 
 const PORT = process.env.PORT || 8090;
 
 // Middleware
+app.use(cookies());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

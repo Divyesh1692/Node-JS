@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+</head>
+<body>
+    <form action="http://localhost:8090/upload" enctype="multipart/form-data" method="post">
+        <input type="text" name="name" placeholder="Movie Name">
+        <input type="file" name="poster" placeholder="Movie Poster">
+        <input type="number" name="duration" placeholder="Movie Duration(Hour)">
+        <input type="number" name="year" placeholder="Movie Year">
+        <input type="submit" value="Upload Movie">
+    </form>
+    
+</body>
+</html>
