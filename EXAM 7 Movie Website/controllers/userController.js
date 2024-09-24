@@ -1,5 +1,5 @@
 const User = require("../models/user.schema");
-
+const path = require("path");
 const signup = async (req, res) => {
   let { username, email, password } = req.body;
   let isUser = await User.findOne({ email });
@@ -19,13 +19,21 @@ const login = async (req, res) => {
   let isUser = await User.findOne({ email });
   if (isUser) {
     if (isUser.password == password) {
-      return res.send({ msg: "Login Successful...!!!" });
+      return res.send({ msg: "Login Successful...!!!", User: isUser });
     } else {
       return res.send({ msg: "Password is Incorrect!!!" });
     }
   } else {
-    return res.redirect("signup").send({ msg: "User Not Found...!!!" });
+    return res.send({ msg: "User Not Found...!!!" });
   }
 };
 
-module.exports = { signup, login };
+const loginPage = (req, res) => {
+  res.sendFile(path.join(__dirname, "../views", "login.html"));
+};
+
+const signupPage = (req, res) => {
+  res.sendFile(path.join(__dirname, "../views", "signup.html"));
+};
+
+module.exports = { signup, login, loginPage, signupPage };

@@ -6,13 +6,22 @@
     <title>Upload</title>
 </head>
 <body>
+    <a href="dashboard">My Dashboard</a><br><br>
     <form action="http://localhost:8090/upload" enctype="multipart/form-data" method="post">
-        <input type="text" name="name" placeholder="Movie Name">
-        <input type="file" name="poster" placeholder="Movie Poster">
-        <input type="number" name="duration" placeholder="Movie Duration(Hour)">
-        <input type="number" name="year" placeholder="Movie Year">
+        <input type="text" name="name" placeholder="Movie Name" id="name" ><br><br>
+       Poster: <input type="file" name="poster" id="poster"><br><br>
+        <select name="category" id="category">
+            <option value="">Select Category</option>
+            <option value="action">Action</option>
+            <option value="horro">Horror</option>
+            <option value="comedy">Comedy</option>
+            <option value="sports">Sports</option>
+            <option value="biopic">Biopic</option>
+        </select><br><br>
+        <input type="string" name="duration" placeholder="Movie Duration(Hour)" id="duration"><br><br>
+        <input type="string" name="year" placeholder="Movie Year" id="year"><br><br>
         <input type="submit" value="Upload Movie">
     </form>
     
 </body>
-</html>
+</html>  

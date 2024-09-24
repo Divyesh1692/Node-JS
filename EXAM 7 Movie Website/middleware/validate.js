@@ -3,8 +3,8 @@ const isAuth = (req, res, next) => {
   if (id) {
     return next();
   } else {
-    return res.redirect("/user/login");
+    return res.redirect("/login");
   }
 };
 
-module.exports = { validate, isAuth };
+module.exports = { isAuth };
