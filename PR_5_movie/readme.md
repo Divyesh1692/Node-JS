@@ -5,10 +5,6 @@ This project is a movie management API built using Node.js, Express, and MongoDB
 ## Table of Contents
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- [Installation](#installation)
-- [Running the Server](#running-the-server)
-- [API Endpoints](#api-endpoints)
-- [Database Models](#database-models)
 
 ## Features
 
