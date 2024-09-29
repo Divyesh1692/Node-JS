@@ -29,5 +29,6 @@ The Movie Website is a web application that allows users to create accounts, upl
 - CSS
 - JavaScript
 - Node.js
+- MongoDB
 
 
