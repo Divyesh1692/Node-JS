@@ -23,6 +23,7 @@
         
 
     </div>
+   
 </body>
 <script>
     const displayMovie =async ()=>{
@@ -49,13 +50,20 @@
         <h4>Category : ${e.category}</h4>
         <h4>Released year : ${e.year}</h4>
         <h5>Uploaded By : ${e.uploaded}</h5>
-
+             <input type="button" id="" value="Delete" onclick="Delete(${e.id})"><br><br>
+    <input type="button" id="" value="Update" onclick="Update(${e.id})">
             `
 
             mainDiv.appendChild(movieDiv);
         });
     
     }
-    displayMovie()
+    displayMovie();
+    const Delete = async(id)=>{
+        console.log(id);
+        
+        let req =await fetch(`http://localhost:8090/movies/${id}`)
+        let data = await req.json();
+    }
 </script>
 </html>

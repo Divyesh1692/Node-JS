@@ -80,6 +80,15 @@ const myMovies = async (req, res) => {
   res.send(data);
 };
 
+const Delete = (req, res) => {
+  let { id } = req.params;
+  let data = Movie.findByIdAndDelete(id);
+  console.log(id);
+  console.log(data);
+
+  res.send(data);
+};
+
 const storage = multer.diskStorage({
   destination: "uploads",
   filename: (req, file, cb) => {
@@ -99,4 +108,5 @@ module.exports = {
   homePage,
   dashboard,
   myMovies,
+  Delete,
 };
