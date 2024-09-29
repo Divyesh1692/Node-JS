@@ -18,6 +18,5 @@ This project is a movie management API built using Node.js, Express, and MongoDB
 
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (MongoDB Atlas for online deployment)
-- **Authentication**: JSON Web Tokens (JWT)
 - **Other Tools**: Mongoose, Postman (for API testing)
 
