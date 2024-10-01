@@ -24,8 +24,8 @@
 
   let res = await req.json();
   console.log("Server Response:", res);
-  document.cookie = `id=${res.User.id}`;
-  window.location.href = "home";
+  document.cookies = `id=${res.id}`;
+  window.location.href = "approve";
 };
 
 const handleData = (e) => {

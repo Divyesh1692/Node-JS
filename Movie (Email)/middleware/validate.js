@@ -1,6 +1,6 @@
 const isAuth = (req, res, next) => {
-  let { email } = req.cookies;
-  if (email) {
+  let { id } = req.cookies;
+  if (id) {
     return next();
   } else {
     return res.redirect("/login");

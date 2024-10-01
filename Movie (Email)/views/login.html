@@ -3,39 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>Login</title>
 </head>
 <body>
     <form id="userData" method="post">
-            <input type="text" name="username" id="username" placeholder="Username">
             <input type="email" name="email" id="email" placeholder="Email">
             <input type="password" name="password" id="password" placeholder="password">
-            <input type="submit" value="Signup">
+            <input type="submit" value="Login">
     </form>
-    <p>Alredy a User? <a href="login">Login</a></p>
+    <p>Not a User? <a href="signup">Signup</a></p>
 </body>
 <script>
     const postData = async (user) => {
-  let req = await fetch("http://localhost:8090/signup", {
+  let req = await fetch("http://localhost:8090/login", {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(user),
   });
-
   let res = await req.json();
-  console.log("Server Response:", res);
-  document.cookie = `id=${res.User.id}`;
+  document.cookie = `id = ${res.User._id}`;
   window.location.href = "home";
 };
 
-const handleData = (e) => {
+const handleData =async (e) => {
   e.preventDefault();
-  let data = {
-    username: document.getElementById("username").value,
+  let data = await {
     email: document.getElementById("email").value,
     password: document.getElementById("password").value,
   };
-
   postData(data);
 };
 

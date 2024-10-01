@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        .mainDiv{
+            display: flex;
+        }
+        .movieDiv{
+            margin: 10px;
+            padding: 10px;
+            border: black solid 2px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <a href="dashboard">My Dashboard</a> <a href="login">Logout</a><br><br>
+<form >
+    
+    <input type="text" name="search" id="search" placeholder="Search Movie">
+   <select name="category" id="category">
+       <option value="">Category</option>
+           <option value="action">Action</option>
+           <option value="horro">Horror</option>
+           <option value="comedy">Comedy</option>
+           <option value="sports">Sports</option>
+           <option value="biopic">Biopic</option>
+   </select>
+   <select name="duration" id="duration">
+    <option value="">Duration</option>
+    <option value="asc">Ascending</option>
+    <option value="des">Descending</option>
+   </select>
+   <select name="year" id="year">
+    <option value="">Year</option>
+    <option value="asc">Ascending</option>
+    <option value="des">Descending</option>
+   </select>
+   <input type="button" value="Filter" onclick="displayMovie()">
+</form>
+
+    <div id="mainDiv" class="mainDiv">
+        
+
+    </div>
+</body>
+<script>
+    const displayMovie =async ()=>{
+        let search = document.getElementById("search").value;
+        let category = document.getElementById("category").value;
+        let duration = document.getElementById("duration").value;
+        let year = document.getElementById("year").value;
+
+        let req;
+        if(search || category||duration||year){
+        req= await fetch(`http://localhost:8090/movies?search=${search}&category=${category}&duration=${duration}&year=${year}`)}
+    else{
+        req =await fetch(`http://localhost:8090/movies`)
+    }
+    
+    let data = await req.json();
+        let allMovies = Array()
+        allMovies = data;
+        console.log(allMovies);
+        
+        let mainDiv = document.getElementById("mainDiv")
+        mainDiv.innerHTML="";
+        allMovies.forEach((e) => {
+
+                console.log(e.approved);
+                
+                let movieDiv = document.createElement("div")
+            movieDiv.className="movieDiv";
+            movieDiv.innerHTML="";
+            movieDiv.innerHTML=`
+            <img src="${e.poster}" width="200px">
+        <h3>Name : ${e.name}</h3>
+        <h4>Duration : ${e.duration}hour</h4>
+        <h4>Category : ${e.category}</h4>
+        <h4>Released year : ${e.year}</h4>
+        <h5>Uploaded By : ${e.uploaded}</h5>
+        <h5>Approved : ${e.approved}</h5>
+
+            `
+
+            mainDiv.appendChild(movieDiv);
+            
+        });
+    
+    }
+    displayMovie()
+</script>
+</html>

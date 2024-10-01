@@ -21,7 +21,7 @@
     body: JSON.stringify(user),
   });
   let res = await req.json();
-  document.cookie = `id = ${res.User._id}`;
+  document.cookie = `id = ${res.User.id}`;
   window.location.href = "home";
 };
 

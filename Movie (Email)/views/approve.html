@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Account</title>
+</head>
+<body>
+    <h1>Verify Account</h1>
+    <input type="text" name="otp" id="otp" placeholder="Enter OTP">
+    <input type="button"  value="Verify" onclick="verify()">
+</body>
+    <script>
+        const verify = async()=>{
+            let OTP = document.getElementById("otp").value;
+            let Otp = {OTP};
+            let req = await fetch(`http://localhost:8090/verify`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(Otp),
+  });
+
+  let res = await req.json();
+  window.location.href = "home";
+  
+             
+        }
+    </script>
+</html>
