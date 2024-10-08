@@ -1,44 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup</title>
-</head>
-<body>
+  </head>
+  <body>
     <form id="userData" method="post">
-            <input type="text" name="username" id="username" placeholder="Username">
-            <input type="email" name="email" id="email" placeholder="Email">
-            <input type="password" name="password" id="password" placeholder="password">
-            <input type="submit" value="Signup">
+      <input type="text" name="username" id="username" placeholder="Username" />
+      <input type="email" name="email" id="email" placeholder="Email" />
+      <input type="text" name="role" id="role" />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="password"
+      />
+      <input type="submit" value="Signup" />
     </form>
     <p>Alredy a User? <a href="login">Login</a></p>
-</body>
-<script>
+  </body>
+  <script>
     const postData = async (user) => {
-  let req = await fetch("http://localhost:8090/signup", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(user),
-  });
+      try {
+        let req = await fetch("http://localhost:8090/signup", {
+          method: "",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(user),
+        });
 
-  let res = await req.json();
-  console.log("Server Response:", res);
-  document.cookies = `id=${res.id}`;
-  window.location.href = "approve";
-};
+        let res = await req.json();
+        console.log("Server Response:", res, "id", res._id);
+        document.cookie = `id=${res._id}`;
+        window.location.href = "approve";
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-const handleData = (e) => {
-  e.preventDefault();
-  let data = {
-    username: document.getElementById("username").value,
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
-  };
+    const handleData = (e) => {
+      e.preventDefault();
+      let data = {
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        role: document.getElementById("role").value,
+      };
+      console.log(data);
 
-  postData(data);
-};
+      postData(data);
+    };
 
-document.getElementById("userData").addEventListener("submit", handleData);
-</script>
+    document.getElementById("userData").addEventListener("submit", handleData);
+  </script>
 </html>

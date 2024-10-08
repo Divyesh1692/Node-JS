@@ -7,7 +7,11 @@ const movieSchema = new mongoose.Schema({
   duration: Number,
   year: Number,
   uploaded: String,
-  approved: { type: Boolean, default: false },
+  approved: {
+    type: String,
+    enum: ["Pending", "Approved", "Rejected"],
+    default: "Pending",
+  },
 });
 const Movie = mongoose.model("Movie", movieSchema);
 

@@ -6,33 +6,29 @@ const User = require("../models/user.schema");
 const allMovies = async (req, res) => {
   const { search, category, duration, year } = req.query;
 
-  let filteredMovies = await Movie.find();
+  let query = {};
+
   if (search) {
-    filteredMovies = await filteredMovies.filter((movie) =>
-      movie.name.toLowerCase().includes(search.toLowerCase())
-    );
+    query.name = { $regex: search, $options: "i" };
   }
 
   if (category) {
-    filteredMovies = await filteredMovies.find(category);
+    query.category = category;
   }
 
+  let moviesQuery = Movie.find(query);
+
   if (duration) {
-    if (duration == "asc") {
-      await filteredMovies.sort((a, b) => a.duration - b.duration);
-    } else {
-      await filteredMovies.sort((a, b) => b.duration - a.duration);
-    }
+    moviesQuery = moviesQuery.sort({ duration: duration == "asc" ? 1 : -1 });
   }
 
   if (year) {
-    if (year == "asc") {
-      await filteredMovies.sort((a, b) => a.year - b.year);
-    } else {
-      await filteredMovies.sort((a, b) => b.year - a.year);
-    }
+    moviesQuery = moviesQuery.sort({ year: year == "asc" ? 1 : -1 });
   }
-  res.send(filteredMovies);
+
+  const filteredMovies = await moviesQuery;
+
+  res.status(200).json(filteredMovies);
 };
 
 const addMovie = async (req, res) => {
@@ -76,17 +72,51 @@ const dashboard = async (req, res) => {
 
 const myMovies = async (req, res) => {
   let { id } = req.cookies;
-  let data = await User.findById(id);
+  let user = await User.findById(id);
+  if (user.role == "admin") {
+    let data = await Movie.find();
+    return res.send({ data, user });
+  } else {
+    let data = await Movie.find({ uploaded: user.username });
+    return res.send({ data, user });
+  }
+};
+
+const Approve = async (req, res) => {
+  let { id } = req.params;
+  let movie = await Movie.findById(id);
+  if (movie) {
+    movie.approved = "Approved";
+    await movie.save();
+    res.send({ msg: "Movie Approved" });
+  } else {
+    res.send({ msg: "Moive Not Found!!!" });
+  }
+};
+
+const Reject = async (req, res) => {
+  let { id } = req.params;
+  let movie = await Movie.findById(id);
+  if (movie) {
+    movie.approved = "Rejected";
+    await movie.save();
+    res.send({ msg: "Movie Rejected" });
+  } else {
+    res.send({ msg: "Moive Not Found!!!" });
+  }
+};
+
+const Delete = async (req, res) => {
+  let { id } = req.params;
+  let data = await Movie.findByIdAndDelete(id);
   res.send(data);
 };
 
-const Delete = (req, res) => {
+const Update = async (req, res) => {
   let { id } = req.params;
-  let data = Movie.findByIdAndDelete(id);
-  console.log(id);
-  console.log(data);
-
+  let data = await Movie.findByIdAndUpdate(id, req.body);
   res.send(data);
+
 };
 
 const storage = multer.diskStorage({
@@ -108,5 +138,8 @@ module.exports = {
   homePage,
   dashboard,
   myMovies,
+  Approve,
+  Reject,
   Delete,
+  Update
 };

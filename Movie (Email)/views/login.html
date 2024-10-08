@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-</head>
-<body>
+  </head>
+  <body>
     <form id="userData" method="post">
-            <input type="email" name="email" id="email" placeholder="Email">
-            <input type="password" name="password" id="password" placeholder="password">
-            <input type="submit" value="Login">
+      <input type="email" name="email" id="email" placeholder="Email" />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="password"
+      />
+      <input type="submit" value="Login" />
     </form>
     <p>Not a User? <a href="signup">Signup</a></p>
-</body>
-<script>
+  </body>
+  <script>
     const postData = async (user) => {
-  let req = await fetch("http://localhost:8090/login", {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(user),
-  });
-  let res = await req.json();
-  document.cookie = `id = ${res.User._id}`;
-  window.location.href = "home";
-};
+      try {
+        let req = await fetch("http://localhost:8090/login", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(user),
+        });
+        let res = await req.json();
+        document.cookie = `id = ${res.User._id}`;
+        window.location.href = "/home";
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-const handleData =async (e) => {
-  e.preventDefault();
-  let data = await {
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
-  };
-  postData(data);
-};
+    const handleData = async (e) => {
+      e.preventDefault();
+      let data = await {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      };
+      postData(data);
+    };
 
-document.getElementById("userData").addEventListener("submit", handleData);
-</script>
+    document.getElementById("userData").addEventListener("submit", handleData);
+  </script>
 </html>

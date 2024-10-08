@@ -1,69 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Dashboard</title>
     <style>
-        .mainDiv{
-            display: flex;
-        }
-        .movieDiv{
-            margin: 10px;
-            padding: 10px;
-            border: black solid 2px;
-            width: 200px;
-        }
+      .mainDiv {
+        display: flex;
+      }
+      .movieDiv {
+        margin: 10px;
+        padding: 10px;
+        border: black solid 2px;
+        width: 200px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h1 id="admin"></h1>
+    <h2 id="user"></h2>
     <a href="home">All Movies</a>
-    <a href="upload">Upload Movies</a>
-    <div id="mainDiv" class="mainDiv">
-        
+    <a href="upload" id="upload" style="display: inline">Upload Movies</a>
+    <a href="login">Logout</a><br /><br />
+    <div id="form" style="display: none"></div>
+    <div id="mainDiv" class="mainDiv"></div>
+  </body>
+  <script>
+    const displayMovie = async () => {
+      let req = await fetch(`http://localhost:8090/mymovies`);
 
-    </div>
-   
-</body>
-<script>
-    const displayMovie =async ()=>{
+      let data = await req.json();
+      console.log(data);
+      let allMovies = Array();
+      allMovies = data.data;
+      console.log(allMovies);
 
-        
-       let req =await fetch(`http://localhost:8090/movies`)
-
-    
-    let data = await req.json();
-        let allMovies = Array()
-        allMovies = data;
-        console.log(allMovies);
-        
-        let mainDiv = document.getElementById("mainDiv")
-        mainDiv.innerHTML="";
+      let mainDiv = document.getElementById("mainDiv");
+      mainDiv.innerHTML = "";
+      if (data.user.role == "admin") {
+        document.getElementById("admin").innerHTML = "Admin Panel";
+        document.getElementById("user").innerHTML =
+          "Hello " + data.user.username;
         allMovies.forEach((e) => {
-            let movieDiv = document.createElement("div")
-            movieDiv.className="movieDiv";
-            movieDiv.innerHTML="";
-            movieDiv.innerHTML=`
+          let movieDiv = document.createElement("div");
+          movieDiv.className = "movieDiv";
+          movieDiv.innerHTML = "";
+          movieDiv.innerHTML = `
             <img src="${e.poster}" width="200px">
         <h3>Name : ${e.name}</h3>
         <h4>Duration : ${e.duration}hour</h4>
         <h4>Category : ${e.category}</h4>
         <h4>Released year : ${e.year}</h4>
         <h5>Uploaded By : ${e.uploaded}</h5>
-             <input type="button" id="" value="Delete" onclick="Delete(${e.id})"><br><br>
-    <input type="button" id="" value="Update" onclick="Update(${e.id})">
-            `
+        <h5>Approved : ${e.approved}</h5>
+             <input type="button" id="" value="Reject" onclick="reject('${e._id}')">
+    <input type="button" id="" value="Approve" onclick="approve('${e._id}')"><br><br>
+    <input type="button" id="" value="Delete" onclick="Delete('${e._id}')">
+    <input type="button" id="" value="Edit" onclick="Edit('${e._id},${e.poster},${e.name},${e.duration},${e.category},${e.year}')">
+            `;
 
-            mainDiv.appendChild(movieDiv);
+          mainDiv.appendChild(movieDiv);
+          console.log(e._id);
         });
-    
-    }
+      } else {
+        document.getElementById("user").innerHTML =
+          "Hello " + data.user.username;
+        allMovies.forEach((e) => {
+          let movieDiv = document.createElement("div");
+          movieDiv.className = "movieDiv";
+          movieDiv.innerHTML = "";
+          movieDiv.innerHTML = `
+            <img src="${e.poster}" width="200px">
+        <h3>Name : ${e.name}</h3>
+        <h4>Duration : ${e.duration}hour</h4>
+        <h4>Category : ${e.category}</h4>
+        <h4>Released year : ${e.year}</h4>
+        <h5>Uploaded By : ${e.uploaded}</h5>
+        <h5>Approved : ${e.approved}</h5>
+             <input type="button" id="" value="Delete" onclick="Delete('${e._id}')"><br><br>
+    <input type="button" id="" value="Edit" onclick="Edit('${e._id},${e.poster},${e.name},${e.duration},${e.category},${e.year}')">
+            `;
+
+          mainDiv.appendChild(movieDiv);
+          console.log(e._id);
+        });
+      }
+    };
+
+    const approve = async (id) => {
+      console.log(id);
+
+      let req = await fetch(`http://localhost:8090/movies/approve/${id}`, {
+        method: "PATCH",
+      });
+      displayMovie();
+    };
     displayMovie();
-    const Delete = async(id)=>{
-        console.log(id);
-        
-        let req =await fetch(`http://localhost:8090/movies/${id}`)
-        let data = await req.json();
-    }
-</script>
+    const reject = async (id) => {
+      console.log(id);
+      let req = await fetch(`http://localhost:8090/movies/reject/${id}`, {
+        method: "PATCH",
+      });
+      displayMovie();
+    };
+
+    const Delete = async (id) => {
+      console.log(id);
+      let req = await fetch(`http://localhost:8090/movies/delete/${id}`, {
+        method: "DELETE",
+      });
+      displayMovie();
+    };
+
+    const Edit = async (id, poster, name, duration, category, year) => {
+      console.log(id, poster, name, duration, category, year);
+      let Div = document.getElementById("form");
+      Div.style.display = "inline";
+      Div.innerHTML = `
+      <form enctype="multipart/form-data" method="post">
+        <h3>Only Enter Details, You Want To Update</h3>
+        <input
+          type="text"
+          name="name"
+          value="${name}"
+          placeholder="Movie Name"
+          id="name"
+        /><br /><br />
+        Poster: <input type="file" name="poster"  id="poster" /><br /><br />
+        <select name="category" id="category">
+          <option value="">Select Category</option>
+          <option value="action">Action</option>
+          <option value="horro">Horror</option>
+          <option value="comedy">Comedy</option>
+          <option value="sports">Sports</option>
+          <option value="biopic">Biopic</option></select
+        ><br /><br />
+        <input
+          type="string"
+          name="duration"
+          value="${duration}"
+          placeholder="Movie Duration(Hour)"
+          id="duration"
+        /><br /><br />
+        <input
+          type="string"
+          name="year"
+          value="${year}"
+          placeholder="Movie Year"
+          id="year"
+        /><br /><br />
+        <input type="button" value="Upload Movie" onclick="Update(id)" />
+      </form>`;
+    };
+
+    const Update = async (id) => {
+      console.log(id);
+      let req = await fetch(`http://localhost:8090/movies/update/${id}`, {
+        method: "PATCH",
+      });
+      displayMovie();
+    };
+  </script>
 </html>
