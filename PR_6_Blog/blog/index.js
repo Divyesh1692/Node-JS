@@ -5,6 +5,7 @@ const cookies = require("cookie-parser");
 const path = require("path");
 const database = require("./config/db");
 const userRouter = require("./routes/user.routes");
+const blogRouter = require("./routes/blog.routes");
 
 const PORT = process.env.PORT || 8090;
 
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 // app.use('/', require('./routes'));
 app.use("/user", userRouter);
+app.use("/blog", blogRouter);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
